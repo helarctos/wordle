@@ -30,19 +30,6 @@ def is_eligible(word, correct, absent, valid, wrong_spot):
             return False
     return True  
 
-# guess_scores_multiple = ["ADIEU=...eu QUEUE=QU..E", # QUOTE
-#     "LABOR=..... STINK=..i.. PITCH=.I... DIVER=dI...", # GIDDY 
-#     "SLAVE=..a.e AGENT=a.e.. MAKER=.A.ER", # CAPER
-#     "ADIEU=.d.E. CEDED=..DE.", # OLDER
-#     "ADIEU=.d.E. MODEL=.oDEl", # OLDER
-#     "ADIEU=..I.. SHINY=shI.. WHIST=WHIS."," # WHISK
-#     "ADIEU=a..e. EARTH=ear.. SHARE=..are REBAR=.e.AR", # CLEAR
-#     "ADIEU=a.... PASTA=.A... CAROL=.ArO. FAVOR=.A.Or"] # RAYON
-
-# make a function out of assigning guesses to correct, present, valid, absent,wrong_spoy 
-# for guess_scores in guess_scores_multiple:
-# run the function on guess_scores
-
 def parse_scores(guess_scores):
     valid = set()
     absent = set()
@@ -66,14 +53,40 @@ def parse_scores(guess_scores):
     print("\nvalid = ", valid, "\ncorrect = ", correct,  "\nabsent = ", absent)
     return (valid, correct, wrong_spot, absent)
 
-guess_scores = "ADIEU=a..e. EARTH=ear.. SHARE=..are REBAR=.e.AR".split() # CLEAR
-valid, correct, wrong_spot, absent = parse_scores(guess_scores)
-wordlist = read_words()
-for word in wordlist:
-    if is_eligible(word, 
-        correct = correct,
-        absent = absent, 
-        valid = valid,
-        wrong_spot = wrong_spot):
-        print(word)
 
+
+def find_answers(wordlist, guess_scores):
+    valid, correct, wrong_spot, absent = parse_scores(guess_scores)
+    for word in wordlist:
+        if is_eligible(word, 
+            correct = correct,
+            absent = absent, 
+            valid = valid,
+            wrong_spot = wrong_spot):
+            print(word)
+
+# guess_scores_multiple = ["ADIEU=...eu QUEUE=QU..E", # QUOTE
+#     "LABOR=..... STINK=..i.. PITCH=.I... DIVER=dI...", # GIDDY 
+#     "SLAVE=..a.e AGENT=a.e.. MAKER=.A.ER", # CAPER
+#     "ADIEU=.d.E. CEDED=..DE.", # OLDER
+#     "ADIEU=.d.E. MODEL=.oDEl", # OLDER
+#     "ADIEU=..I.. SHINY=shI.. WHIST=WHIS.", # WHISK
+#     "ADIEU=a..e. EARTH=ear.. SHARE=..are REBAR=.e.AR", # CLEAR
+#     "ADIEU=a.... PASTA=.A... CAROL=.ArO. FAVOR=.A.Or", # RAYON
+
+games = {
+    "QUOTE": "ADIEU=...eu QUEUE=QU..E",
+    "GIDDY": "LABOR=..... STINK=..i.. PITCH=.I... DIVER=dI...",
+    "CAPER": "SLAVE=..a.e AGENT=a.e.. MAKER=.A.ER",
+    "OLDER": "ADIEU=.d.E. CEDED=..DE.",
+    "OLDER": "ADIEU=.d.E. MODEL=.oDEl",
+    "WHISK": "ADIEU=..I.. SHINY=shI.. WHIST=WHIS.",
+    "CLEAR": "ADIEU=a..e. EARTH=ear.. SHARE=..are REBAR=.e.AR",
+    "RAYON": "ADIEU=a.... PASTA=.A... CAROL=.ArO. FAVOR=.A.Or",
+}
+
+wordlist = read_words()
+for answer, guess_scores in games.items():
+    print(answer, guess_scores)
+    find_answers(wordlist, guess_scores.split())
+    print(answer)
