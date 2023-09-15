@@ -38,7 +38,6 @@ def parse_scores(guess_scores):
 
     for guess_score in guess_scores:
         guess, score = guess_score.split('=')
-        print(guess, score)
         for i in range(5):
             print(i, guess[i], score[i])
             if guess[i] == score[i]:
@@ -46,14 +45,13 @@ def parse_scores(guess_scores):
                 correct[i] = guess[i]
             elif guess[i] == score[i].upper():
                 valid.add(guess[i])
+                wrong_spot[i].add(guess[i])
             else:
                 if guess[i] not in valid:
                     absent.add(guess[i])
 
-    print("\nvalid = ", valid, "\ncorrect = ", correct,  "\nabsent = ", absent)
+    print("\nvalid = ", valid, "\ncorrect = ", correct,  "\nabsent = ", absent, "\nwrong_spot = ", wrong_spot)
     return (valid, correct, wrong_spot, absent)
-
-
 
 def find_answers(wordlist, guess_scores):
     valid, correct, wrong_spot, absent = parse_scores(guess_scores)
@@ -87,6 +85,6 @@ games = {
 
 wordlist = read_words()
 for answer, guess_scores in games.items():
-    print(answer, guess_scores)
     find_answers(wordlist, guess_scores.split())
-    print(answer)
+    print(answer, guess_scores)
+    print("=" * 75)
