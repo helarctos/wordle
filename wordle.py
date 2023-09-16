@@ -15,6 +15,7 @@ def read_words():
 # ADIEU=..I.. SHINY=shI.. WHIST=WHIS. # WHISK
 # ADIEU=a..e. EARTH=ear.. SHARE=..are REBAR=.e.AR # CLEAR
 # ADIEU=a.... PASTA=.A... CAROL=.ArO. FAVOR=.A.Or # RAYON
+# ADIEU=...e. BERET=.ereT GREEt=.rEeT #EXERT
 
 def is_eligible(word, correct, absent, valid, wrong_spot):
     letters = {c for c in word}
@@ -81,6 +82,7 @@ games = {
     "WHISK": "ADIEU=..I.. SHINY=shI.. WHIST=WHIS.",
     "CLEAR": "ADIEU=a..e. EARTH=ear.. SHARE=..are REBAR=.e.AR",
     "RAYON": "ADIEU=a.... PASTA=.A... CAROL=.ArO. FAVOR=.A.Or",
+    "EXERT": "ADIEU=...e. BERET=.ereT GREEt=.rEeT"
 }
 
 wordlist = read_words()
